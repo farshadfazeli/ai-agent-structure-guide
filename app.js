@@ -1,16 +1,41 @@
-(function(){
-  const langKey='ai-agent-language';
-  const stored=localStorage.getItem(langKey);
-  const isFa=()=> (localStorage.getItem(langKey)||'fa')==='fa';
-  function header(){
-    let el=document.querySelector('[data-shared-header]');
-    if(!el){el=document.createElement('header');el.dataset.sharedHeader='';document.body.prepend(el)}
-    el.className='shared-header';
-    el.innerHTML='<nav class="shared-nav"><a class="brand" href="index.html">AI Agent Learning Hub</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="shared-menu"><span class="menu-icon" aria-hidden="true">☰</span><span class="menu-label">منو</span></button><div class="shared-menu" id="shared-menu"><a class="back-home" href="index.html">⌂ <span data-fa="بازگشت به خانه" data-en="Back to home">بازگشت به خانه</span></a><div class="language-switcher"><button type="button" data-set-lang="fa">فارسی</button><button type="button" data-set-lang="en">English</button></div></div></nav>';
-    document.querySelectorAll('.language-switcher,.language-box').forEach(x=>{if(!x.closest('.shared-header'))x.style.display='none'});
+(function () {
+  const langKey = 'ai-agent-language';
+  const stored = localStorage.getItem(langKey);
+  const isFa = () => (localStorage.getItem(langKey) || 'fa') === 'fa';
+  function header() {
+    let el = document.querySelector('[data-shared-header]');
+    if (!el) { el = document.createElement('header'); el.dataset.sharedHeader = ''; document.body.prepend(el); }
+    el.className = 'shared-header';
+    el.innerHTML = '<nav class="shared-nav"><a class="brand" href="index.html">AI Agent Learning Hub</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="shared-menu"><span class="menu-icon" aria-hidden="true">&#9776;</span></button><div class="shared-menu" id="shared-menu"><a class="back-home" href="index.html">⌂ <span data-fa="بازگشت به خانه" data-en="Back to home">بازگشت به خانه</span></a><div class="language-switcher"><button type="button" data-set-lang="fa">فارسی</button><button type="button" data-set-lang="en">English</button></div></div></nav>';
+    document.querySelectorAll('.language-switcher,.language-box').forEach(x => { if (!x.closest('.shared-header')) x.style.display = 'none'; });
   }
-  function footer(){let el=document.querySelector('[data-shared-footer]');if(!el){el=document.createElement('footer');el.dataset.sharedFooter='';document.body.append(el)}el.className='shared-footer';el.textContent=isFa()?'ساخته‌شده برای یادگیری و تمرین مفاهیم AI Agent':'Built for learning and practicing AI Agent concepts';}
-  function apply(lang){localStorage.setItem(langKey,lang);document.documentElement.lang=lang;document.documentElement.dir=lang==='fa'?'rtl':'ltr';document.querySelectorAll('[data-set-lang]').forEach(b=>b.classList.toggle('active',b.dataset.setLang===lang));document.querySelectorAll('[data-fa][data-en]').forEach(el=>el.textContent=el.dataset[lang]);footer();if(typeof window.changeLanguage==='function'&&window.changeLanguage!==apply)window.changeLanguage(lang);}
-  function modal(){if(stored)return;const m=document.createElement('div');m.className='language-modal';m.innerHTML='<div class="language-dialog" role="dialog" aria-modal="true"><h2>زبان را انتخاب کنید</h2><p>زبان موردنظر برای همهٔ صفحات را انتخاب کنید.</p><div class="language-choice"><button data-pick="fa">فارسی</button><button data-pick="en">English</button></div></div>';document.body.appendChild(m);m.querySelectorAll('[data-pick]').forEach(b=>b.onclick=()=>{apply(b.dataset.pick);m.remove()})}
-  document.addEventListener('DOMContentLoaded',()=>{if(!document.querySelector('link[href="styles.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='styles.css';document.head.append(l)}header();footer();document.querySelectorAll('[data-set-lang]').forEach(b=>b.onclick=()=>apply(b.dataset.setLang));const toggle=document.querySelector('.menu-toggle'),menu=document.querySelector('.shared-menu');if(toggle&&menu){toggle.onclick=()=>{const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));menu.classList.toggle('is-open',!open)};menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{toggle.setAttribute('aria-expanded','false');menu.classList.remove('is-open')}));document.addEventListener('click',e=>{if(!e.target.closest('.shared-nav')){toggle.setAttribute('aria-expanded','false');menu.classList.remove('is-open')}})}const lang=stored||'fa';apply(lang);modal()});
+  function footer() {
+    let el = document.querySelector('[data-shared-footer]');
+    if (!el) { el = document.createElement('footer'); el.dataset.sharedFooter = ''; document.body.append(el); }
+    el.className = 'shared-footer';
+    el.textContent = isFa() ? 'ساخته‌شده برای یادگیری و تمرین مفاهیم AI Agent' : 'Built for learning and practicing AI Agent concepts';
+  }
+  function apply(lang) {
+    localStorage.setItem(langKey, lang); document.documentElement.lang = lang; document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+    document.querySelectorAll('[data-set-lang]').forEach(b => b.classList.toggle('active', b.dataset.setLang === lang));
+    document.querySelectorAll('[data-fa][data-en]').forEach(el => { el.textContent = el.dataset[lang]; }); footer();
+    if (typeof window.changeLanguage === 'function' && window.changeLanguage !== apply) window.changeLanguage(lang);
+  }
+  function modal() {
+    if (stored) return;
+    const m = document.createElement('div'); m.className = 'language-modal';
+    m.innerHTML = '<div class="language-dialog" role="dialog" aria-modal="true"><h2>زبان را انتخاب کنید</h2><p>زبان موردنظر برای همهٔ صفحات را انتخاب کنید.</p><div class="language-choice"><button data-pick="fa">فارسی</button><button data-pick="en">English</button></div></div>';
+    document.body.appendChild(m); m.querySelectorAll('[data-pick]').forEach(b => b.onclick = () => { apply(b.dataset.pick); m.remove(); });
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!document.querySelector('link[href="styles.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'styles.css'; document.head.append(l); }
+    header(); footer(); document.querySelectorAll('[data-set-lang]').forEach(b => b.onclick = () => apply(b.dataset.setLang));
+    const toggle = document.querySelector('.menu-toggle'), menu = document.querySelector('.shared-menu');
+    if (toggle && menu) {
+      toggle.onclick = () => { const open = toggle.getAttribute('aria-expanded') === 'true'; toggle.setAttribute('aria-expanded', String(!open)); menu.classList.toggle('is-open', !open); };
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { toggle.setAttribute('aria-expanded', 'false'); menu.classList.remove('is-open'); }));
+      document.addEventListener('click', e => { if (!e.target.closest('.shared-nav')) { toggle.setAttribute('aria-expanded', 'false'); menu.classList.remove('is-open'); } });
+    }
+    apply(stored || 'fa'); modal();
+  });
 })();
