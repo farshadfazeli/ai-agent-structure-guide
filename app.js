@@ -18,7 +18,10 @@
   function apply(lang) {
     localStorage.setItem(langKey, lang); document.documentElement.lang = lang; document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
     document.querySelectorAll('[data-set-lang]').forEach(b => b.classList.toggle('active', b.dataset.setLang === lang));
-    document.querySelectorAll('[data-fa][data-en]').forEach(el => { el.textContent = el.dataset[lang]; }); footer();
+    document.querySelectorAll('[data-fa][data-en]').forEach(el => { el.textContent = el.dataset[lang]; });
+    document.querySelectorAll('[data-fa-aria-label][data-en-aria-label]').forEach(el => { el.setAttribute('aria-label', el.dataset[`${lang}AriaLabel`]); });
+    document.querySelectorAll('[data-fa-title][data-en-title]').forEach(el => { el.textContent = el.dataset[`${lang}Title`]; });
+    footer();
     if (typeof window.changeLanguage === 'function' && window.changeLanguage !== apply) window.changeLanguage(lang);
   }
   function modal() {
