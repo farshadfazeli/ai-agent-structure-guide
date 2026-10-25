@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title
+    data-fa-title="نمونه ۱: ساخت Case"
+    data-en-title="Sample 1: Create a Case"
+  >
+    نمونه ۱: ساخت Case
+  </title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .sample-page {
+      padding: 42px 0 58px;
+    }
+
+    .sample-hero,
+    .sample-panel {
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .sample-hero {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .sample-hero h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+    }
+
+    .sample-hero p {
+      max-width: 720px;
+      margin: 12px auto 0;
+      color: var(--muted);
+    }
+
+    .sample-panel {
+      margin-top: 20px;
+    }
+
+    .sample-panel h2 {
+      margin-top: 0;
+    }
+
+    .sample-panel p {
+      color: var(--muted);
+    }
+
+    .download-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px;
+      border: 1px dashed var(--primary);
+      border-radius: 16px;
+      background: #f7f9ff;
+    }
+
+    .download-box strong {
+      display: block;
+    }
+
+    .download-box span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .download-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: 11px 18px;
+      border-radius: 11px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .download-button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .prompt-wrap {
+      position: relative;
+    }
+
+    .prompt {
+      width: 100%;
+      min-height: 245px;
+      resize: vertical;
+      padding: 18px 52px 18px 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #172033;
+      color: #eaf0ff;
+      direction: rtl;
+      text-align: right;
+      font: 500 0.95rem/2 Vazirmatn, Tahoma, sans-serif;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    .prompt:focus {
+      outline: 3px solid rgba(49, 87, 213, 0.22);
+      border-color: var(--primary);
+    }
+
+    .prompt[data-language="en"] {
+      direction: ltr;
+      text-align: left;
+    }
+
+    .copy-hint {
+      position: absolute;
+      top: 12px;
+      inset-inline-start: 12px;
+      padding: 5px 9px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #dbe5ff;
+      font-size: 0.78rem;
+      pointer-events: none;
+    }
+
+    .copy-status {
+      min-height: 1.7em;
+      margin: 8px 0 0 !important;
+      color: var(--primary) !important;
+      font-weight: 700;
+    }
+
+    @media (max-width: 650px) {
+      .sample-page {
+        padding: 24px 0 40px;
+      }
+
+      .sample-hero,
+      .sample-panel {
+        padding: 18px;
+        border-radius: 18px;
+      }
+
+      .download-box {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .download-button {
+        width: 100%;
+      }
+
+      .prompt {
+        min-height: 290px;
+        font-size: 0.86rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div data-shared-header></div>
+
+  <main class="container sample-page">
+    <section class="sample-hero">
+      <h1
+        data-fa="نمونه ۱: ساخت Case با شماره موبایل"
+        data-en="Sample 1: Create a Case by Mobile Phone"
+      >
+        نمونه ۱: ساخت Case با شماره موبایل
+      </h1>
+
+      <p
+        data-fa="فایل نمونه را دانلود کنید و از پرامپت آماده برای پیاده‌سازی endpoint استفاده کنید."
+        data-en="Download the sample files and use the ready-to-copy prompt to implement the endpoint."
+      >
+        فایل نمونه را دانلود کنید و از پرامپت آماده برای پیاده‌سازی endpoint استفاده کنید.
+      </p>
+    </section>
+
+    <section class="sample-panel">
+      <h2
+        data-fa="دانلود فایل نمونه"
+        data-en="Download the sample"
+      >
+        دانلود فایل نمونه
+      </h2>
+
+      <div class="download-box">
+        <div>
+          <strong>Sample1.zip</strong>
+
+          <span
+            data-fa="شامل فایل‌های Entity و Resource نمونه"
+            data-en="Includes the sample Entity and Resource files"
+          >
+            شامل فایل‌های Entity و Resource نمونه
+          </span>
+        </div>
+
+        <a
+          class="download-button"
+          href="Sample1.zip"
+          download
+          data-fa="دانلود نمونه ۱"
+          data-en="Download Sample 1"
+        >
+          دانلود نمونه ۱
+        </a>
+      </div>
+    </section>
+
+    <section class="sample-panel">
+      <h2
+        data-fa="پرامپت ساخت endpoint"
+        data-en="Endpoint creation prompt"
+      >
+        پرامپت ساخت endpoint
+      </h2>
+
+      <p
+        data-fa="برای کپی کردن، روی متن زیر کلیک کنید."
+        data-en="Click the text below to copy it."
+      >
+        برای کپی کردن، روی متن زیر کلیک کنید.
+      </p>
+
+      <div class="prompt-wrap">
+        <textarea
+          id="sample-prompt"
+          class="prompt"
+          readonly
+          aria-label="پرامپت ساخت endpoint"
+          data-fa-label="پرامپت ساخت endpoint"
+          data-en-label="Endpoint creation prompt"
+          data-fa="یک endpoint بساز با ورودی‌های caseTitle و customerMobilePhone که هر دو از نوع string باشند. Contact را با فیلد mobilephone پیدا کن، سپس آن Contact را روی فیلد customer در Case قرار بده و Case را با عنوان caseTitle بساز. قوانین معماری و الگوهای پروژه را رعایت کن."
+          data-en="Build an endpoint with two string inputs: caseTitle and customerMobilePhone. Find the Contact by its mobilephone field, set that Contact on the Case customer field, and create the Case using caseTitle. Follow the project's architecture and conventions."
+        >یک endpoint بساز با ورودی‌های caseTitle و customerMobilePhone که هر دو از نوع string باشند. Contact را با فیلد mobilephone پیدا کن، سپس آن Contact را روی فیلد customer در Case قرار بده و Case را با عنوان caseTitle بساز. قوانین معماری و الگوهای پروژه را رعایت کن.</textarea>
+
+        <span
+          class="copy-hint"
+          data-fa="کلیک برای کپی"
+          data-en="Click to copy"
+        >
+          کلیک برای کپی
+        </span>
+      </div>
+
+      <p
+        id="copy-status"
+        class="copy-status"
+        aria-live="polite"
+      ></p>
+    </section>
+  </main>
+
+  <div data-shared-footer></div>
+
+  <script src="app.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const prompt = document.getElementById('sample-prompt');
+      const status = document.getElementById('copy-status');
+
+      function getCurrentLanguage() {
+        const language = localStorage.getItem('ai-agent-language') || 'fa';
+        return language === 'en' ? 'en' : 'fa';
+      }
+
+      function updatePromptLanguage() {
+        const language = getCurrentLanguage();
+
+        prompt.value = prompt.dataset[language] || prompt.dataset.fa;
+        prompt.dataset.language = language;
+
+        prompt.setAttribute(
+          'aria-label',
+          prompt.dataset[`${language}Label`] || prompt.dataset.faLabel
+        );
+
+        status.textContent = '';
+      }
+
+      prompt.addEventListener('click', async () => {
+        const language = getCurrentLanguage();
+        const promptText = prompt.dataset[language] || prompt.dataset.fa;
+
+        try {
+          await navigator.clipboard.writeText(promptText);
+        } catch {
+          prompt.focus();
+          prompt.select();
+          document.execCommand('copy');
+          prompt.setSelectionRange(0, 0);
+        }
+
+        status.dataset.fa = 'پرامپت کپی شد.';
+        status.dataset.en = 'Prompt copied.';
+        status.textContent = status.dataset[language];
+      });
+
+      updatePromptLanguage();
+
+      const languageObserver = new MutationObserver(() => {
+        updatePromptLanguage();
+      });
+
+      languageObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['lang', 'dir']
+      });
+      window.addEventListener('storage', (event) => {
+        if (event.key === 'ai-agent-language') {
+          updatePromptLanguage();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
