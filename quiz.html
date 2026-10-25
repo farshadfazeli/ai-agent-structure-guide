@@ -205,6 +205,26 @@
       border-radius: 12px;
       background: var(--warning-bg);
       outline: 2px solid #e7ad35;
+      margin-top: 4%;
+    }
+
+    .question.correct-answer {
+      outline: 2px solid var(--success);
+      outline-offset: 4px;
+      border-radius: 12px;
+      background: var(--success-bg);
+      margin-top: 4%;
+      margin-bottom: 2%;
+    }
+
+    .question.wrong-answer {
+      outline: 2px solid var(--danger);
+      outline-offset: 4px;
+      border-radius: 12px;
+      background: var(--danger-bg);
+      margin-top: 4%;
+      margin-bottom: 2%;
+
     }
 
     .actions {
@@ -1062,9 +1082,18 @@
       quizForm.innerHTML = questions.map((item, index) => {
         const question = item[currentLanguage];
         const savedAnswer = window[`answer_${index}`];
+        const questionStatus = lastScore
+          ? lastScore.correct.includes(index)
+            ? "correct-answer"
+            : lastScore.wrong.some(answer => answer.index === index)
+              ? "wrong-answer"
+              : lastScore.unanswered.some(answer => answer.index === index)
+                ? "empty-answer"
+                : ""
+          : "";
 
         return `
-          <div class="question" id="question-${index}">
+          <div class="question ${questionStatus}" id="question-${index}">
             <div class="question-title">
               <span class="question-number">${index + 1}</span>
               <span>${question.question}</span>
@@ -1103,7 +1132,7 @@
     function selectOption(questionIndex, input) {
       const question = document.getElementById(`question-${questionIndex}`);
 
-      question.classList.remove("empty-answer");
+      question.classList.remove("empty-answer", "correct-answer", "wrong-answer");
 
       question.querySelectorAll(".option").forEach(option => {
         option.classList.remove("selected");
@@ -1115,6 +1144,7 @@
 
     function submitQuiz() {
       let correctCount = 0;
+      const correct = [];
       const wrong = [];
       const unanswered = [];
 
@@ -1124,7 +1154,11 @@
           `input[name="question-${index}"]:checked`
         );
 
-        questionElement.classList.remove("empty-answer");
+        questionElement.classList.remove(
+          "empty-answer",
+          "correct-answer",
+          "wrong-answer"
+        );
 
         if (!selected) {
           questionElement.classList.add("empty-answer");
@@ -1142,7 +1176,10 @@
 
         if (selectedAnswer === item.answer) {
           correctCount++;
+          correct.push(index);
+          questionElement.classList.add("correct-answer");
         } else {
+          questionElement.classList.add("wrong-answer");
           wrong.push({
             index,
             userAnswer: selectedAnswer,
@@ -1154,6 +1191,7 @@
 
       lastScore = {
         correctCount,
+        correct,
         wrong,
         unanswered
       };
