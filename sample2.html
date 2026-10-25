@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title data-fa-title="نمونه ۲: ساخت تمپلیت" data-en-title="Sample 2: Build the Template">نمونه ۲: ساخت تمپلیت</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .sample-page{padding:42px 0 58px}.sample-hero,.sample-panel{padding:28px;border:1px solid var(--border);border-radius:22px;background:var(--card);box-shadow:var(--shadow)}.sample-hero{text-align:center;margin-bottom:20px}.sample-hero h1{margin:0;font-size:clamp(1.8rem,4vw,2.7rem)}.sample-hero p{max-width:720px;margin:12px auto 0;color:var(--muted)}.sample-panel{margin-top:20px}.sample-panel h2{margin-top:0}.sample-panel p{color:var(--muted)}.download-box{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px;border:1px dashed var(--primary);border-radius:16px;background:#f7f9ff}.download-box strong{display:block}.download-box span{color:var(--muted);font-size:.9rem}.download-button{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:11px 18px;border-radius:11px;background:var(--primary);color:#fff;text-decoration:none;font-weight:800}.download-button:hover{background:var(--primary-dark);transform:translateY(-1px)}.prompt-wrap{position:relative}.prompt{width:100%;min-height:150px;resize:vertical;padding:18px 52px 18px 18px;border:1px solid var(--border);border-radius:16px;background:#172033;color:#eaf0ff;direction:rtl;text-align:right;font:500 .95rem/2 Vazirmatn,Tahoma,sans-serif;cursor:pointer;box-sizing:border-box}.prompt:focus{outline:3px solid rgba(49,87,213,.22);border-color:var(--primary)}.prompt[data-language="en"]{direction:ltr;text-align:left}.copy-hint{position:absolute;top:12px;inset-inline-start:12px;padding:5px 9px;border-radius:8px;background:rgba(255,255,255,.12);color:#dbe5ff;font-size:.78rem;pointer-events:none}.copy-status{min-height:1.7em;margin:8px 0 0!important;color:var(--primary)!important;font-weight:700}@media(max-width:650px){.sample-page{padding:24px 0 40px}.sample-hero,.sample-panel{padding:18px;border-radius:18px}.download-box{align-items:stretch;flex-direction:column}.download-button{width:100%}.prompt{min-height:190px;font-size:.86rem}}
+  </style>
+</head>
+<body>
+  <div data-shared-header></div>
+  <main class="container sample-page">
+    <section class="sample-hero">
+      <h1 data-fa="نمونه ۲: ساخت تمپلیت Roadmap" data-en="Sample 2: Build a Roadmap Template">نمونه ۲: ساخت تمپلیت Roadmap</h1>
+      <p data-fa="فایل‌های راهنما را دانلود کنید و از پرامپت آماده برای ساخت یک تمپلیت عمومی و قابل ویرایش استفاده کنید." data-en="Download the guidance files and use the ready-to-copy prompt to build a reusable, editable template.">فایل‌های راهنما را دانلود کنید و از پرامپت آماده برای ساخت یک تمپلیت عمومی و قابل ویرایش استفاده کنید.</p>
+    </section>
+    <section class="sample-panel">
+      <h2 data-fa="دانلود فایل‌های نمونه" data-en="Download the sample files">دانلود فایل‌های نمونه</h2>
+      <div class="download-box">
+        <div><strong>Sample2.zip</strong><span data-fa="شامل AGENTS.md و مستندات ساخت Roadmap Template" data-en="Includes AGENTS.md and the Roadmap Template documentation">شامل AGENTS.md و مستندات ساخت Roadmap Template</span></div>
+        <a class="download-button" href="Sample2.zip" download data-fa="دانلود نمونه ۲" data-en="Download Sample 2">دانلود نمونه ۲</a>
+      </div>
+    </section>
+    <section class="sample-panel">
+      <h2 data-fa="پرامپت" data-en="Prompt">پرامپت</h2>
+      <p data-fa="برای کپی کردن، روی متن زیر کلیک کنید." data-en="Click the text below to copy it.">برای کپی کردن، روی متن زیر کلیک کنید.</p>
+      <div class="prompt-wrap">
+        <textarea id="sample-prompt" class="prompt" readonly aria-label="پرامپت" data-fa-label="پرامپت" data-en-label="Prompt" data-fa="تمپلیت رو بساز" data-en="Build the template">تمپلیت رو بساز</textarea>
+        <span class="copy-hint" data-fa="کلیک برای کپی" data-en="Click to copy">کلیک برای کپی</span>
+      </div>
+      <p id="copy-status" class="copy-status" aria-live="polite"></p>
+    </section>
+  </main>
+  <div data-shared-footer></div>
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const prompt = document.getElementById('sample-prompt');
+      const status = document.getElementById('copy-status');
+      const language = () => localStorage.getItem('ai-agent-language') === 'en' ? 'en' : 'fa';
+      const update = () => { const lang = language(); prompt.value = prompt.dataset[lang] || prompt.dataset.fa; prompt.dataset.language = lang; prompt.setAttribute('aria-label', prompt.dataset[`${lang}Label`] || prompt.dataset.faLabel); status.textContent = ''; };
+      prompt.addEventListener('click', async () => { const lang = language(); const value = prompt.dataset[lang] || prompt.dataset.fa; try { await navigator.clipboard.writeText(value); } catch { prompt.focus(); prompt.select(); document.execCommand('copy'); prompt.setSelectionRange(0, 0); } status.dataset.fa = 'پرامپت کپی شد.'; status.dataset.en = 'Prompt copied.'; status.textContent = status.dataset[lang]; });
+      update();
+      new MutationObserver(update).observe(document.documentElement, {attributes:true, attributeFilter:['lang','dir']});
+      window.addEventListener('storage', event => { if (event.key === 'ai-agent-language') update(); });
+    });
+  </script>
+</body>
+</html>
