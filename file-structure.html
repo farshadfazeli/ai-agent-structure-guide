@@ -9,7 +9,19 @@
     .page{padding:42px 0 58px}.hero,.panel,.file-card{padding:28px;border:1px solid var(--border);border-radius:22px;background:var(--card);box-shadow:var(--shadow)}.hero{text-align:center;margin-bottom:20px}.hero h1{margin:0;font-size:clamp(1.8rem,4vw,2.7rem)}.hero p{max-width:760px;margin:12px auto 0;color:var(--muted)}
     .eyebrow{display:inline-block;padding:4px 12px;border-radius:99px;color:var(--primary);background:#edf1ff;font-size:.86rem;font-weight:800}.section-title{margin:34px 0 14px}.section-title h2{margin:0}.section-title p{margin:4px 0;color:var(--muted)}
     .tree{direction:ltr;text-align:left;margin:0;overflow:auto;padding:22px;border-radius:16px;background:#172033;color:#eaf0ff;font:500 .92rem/2 Consolas,monospace}.tree .folder{color:#91b5ff}.tree .note{color:#aab6ca}.files{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.file-card h3{margin:0 0 8px;color:var(--primary);font-size:1.15rem}.file-card p{color:var(--muted);margin:0 0 12px}.inline-code{direction:ltr;unicode-bidi:embed;font-family:Consolas,monospace;color:var(--primary-dark)}.tag{display:inline-block;margin:3px 0;padding:2px 9px;border-radius:8px;background:#f0f3f9;color:var(--muted);font-size:.8rem}.panel{margin-top:20px}.panel h2{margin-top:0}.panel p{color:var(--muted)}.example{direction:ltr;text-align:left;margin:14px 0 0;padding:16px;overflow:auto;border-radius:14px;background:#f7f9fc;border:1px solid var(--border);font:500 .86rem/1.8 Consolas,monospace;white-space:pre-wrap}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}.flow div{padding:15px 10px;text-align:center;border:1px solid var(--border);border-radius:14px;background:#fbfcff}.flow strong{display:block;color:var(--primary)}
-    @media(max-width:760px){.files,.flow{grid-template-columns:1fr}.hero,.panel,.file-card{padding:21px}}
+    @media(max-width:760px){
+      .page{padding:24px 0 40px}
+      .files,.flow{grid-template-columns:1fr}
+      .hero,.panel,.file-card{padding:18px;border-radius:18px}
+      .hero h1{font-size:1.65rem;line-height:1.55}
+      .hero p,.panel p,.file-card p{font-size:.92rem;line-height:2}
+      .section-title{margin:26px 0 12px}
+      .section-title h2{font-size:1.25rem}
+      .tree{padding:14px;font-size:.72rem;line-height:1.9;border-radius:12px}
+      .example{padding:12px;font-size:.72rem;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}
+      .file-card h3{font-size:1.05rem;overflow-wrap:anywhere}
+      .flow div{padding:12px 9px;font-size:.9rem}
+    }
   </style>
 </head>
 <body>
